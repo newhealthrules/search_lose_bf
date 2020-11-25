@@ -38,3 +38,4 @@ jobs:
           git config --local user.name "GitHub Action"
           git add results/
           git commit -m "Add changes" -a
+          git push
