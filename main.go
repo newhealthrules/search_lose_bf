@@ -55,6 +55,12 @@ func results(page *rod.Page, basePath string) {
 	}
 }
 func run(search string) {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Recovered in f", r, search)
+		}
+	}()
+
 	device := devices.IPadPro
 	browser := rod.New().DefaultDevice(device).Timeout(45 * time.Minute).Trace(true).MustConnect()
 	defer browser.MustClose()
