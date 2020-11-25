@@ -101,7 +101,11 @@ func main() {
 	defaults.Slow = 1200 * time.Millisecond
 	defaults.Devtools = true
 	// defaults.Dir = "./data"
-	b, _ := ioutil.ReadFile("Lose Belly Fat.txt")
+	b, err := ioutil.ReadFile("./Lose Belly Fat.txt")
+	if err != nil {
+		fmt.Println("Error reading file", err)
+		return
+	}
 	terms := strings.Split(string(b), "\n")
 	for i, search := range terms {
 		fmt.Print(i, search)
