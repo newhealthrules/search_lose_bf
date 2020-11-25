@@ -56,7 +56,7 @@ func results(page *rod.Page, basePath string) {
 }
 func run(search string) {
 	device := devices.IPadPro
-	browser := rod.New().DefaultDevice(device).Timeout(5 * time.Minute).Trace(true).MustConnect()
+	browser := rod.New().DefaultDevice(device).Timeout(45 * time.Minute).Trace(true).MustConnect()
 	defer browser.MustClose()
 
 	// You can also use bypass.JS directly without rod
