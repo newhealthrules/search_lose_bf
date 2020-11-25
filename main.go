@@ -54,13 +54,7 @@ func results(page *rod.Page, basePath string) {
 		screenshot(page, x, pathPrefix+".png")
 	}
 }
-
-func main() {
-	defaults.Show = false
-	defaults.Slow = 1200 * time.Millisecond
-	defaults.Devtools = true
-	// defaults.Dir = "./data"
-
+func run(search string) {
 	device := devices.IPadPro
 	browser := rod.New().DefaultDevice(device).Timeout(5 * time.Minute).Trace(true).MustConnect()
 	defer browser.MustClose()
@@ -68,7 +62,7 @@ func main() {
 	// You can also use bypass.JS directly without rod
 	fmt.Printf("js file size: %d\n\n", len(bypass.JS))
 
-	search := "lose belly fat"
+	// search := "lose belly fat"
 	page := bypass.MustPage(browser)
 
 	page.MustWaitNavigation()
@@ -94,6 +88,20 @@ func main() {
 	results(page, basePath+"page3-")
 
 	time.Sleep(5 * time.Second)
+}
+
+func main() {
+	defaults.Show = false
+	defaults.Slow = 1200 * time.Millisecond
+	defaults.Devtools = true
+	// defaults.Dir = "./data"
+	b, _ := ioutil.ReadFile("Lose Belly Fat.txt")
+	terms := strings.Split(string(b), "\n")
+	for i, search := range terms {
+		fmt.Print(i, search)
+		run(search)
+	}
+
 }
 
 func printReport(page *rod.Page) {
